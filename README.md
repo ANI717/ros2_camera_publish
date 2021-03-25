@@ -46,7 +46,7 @@ topic: "racecar/camera" (topic name)
 
 queue_size: 1 (amount of queued messages)
 
-period: 0.1 (executes every 0.1 seconds)
+period: 0.1 (execution time)
 ```
 
 ## Install Package
