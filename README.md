@@ -39,7 +39,8 @@ python3 -m pip install opencv-contrib-python
 ## Parameter Settings
 Edit *settings.json* file to set the parameters.
 ```
-device_index: 0 (Camera Device Index for OpenCV Videocapture. This is useful while working with multiple cameras.)
+device_index: 0
+      (Camera Device Index for OpenCV Videocapture. This is useful while working with multiple cameras.)
 topic: "racecar/camera" (topic name)
 queue_size: 1 (amount of queued messages)
 period: 0.1 (executes every 0.1 seconds)
