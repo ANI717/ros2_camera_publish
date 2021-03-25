@@ -32,7 +32,7 @@ ament_index_python.packages
 ## Install OpenCV
 ```
 sudo apt update
-sudo apt install python3-pipcolcon build && . install/setup.bash && ros2 run ros2_camera_publish execute
+sudo apt install python3-pip
 python3 -m pip install opencv-contrib-python
 ```
 
