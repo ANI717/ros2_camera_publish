@@ -16,6 +16,7 @@ Example:
 
 
 #___Import Modules:
+import os
 import cv2
 import json
 import numpy as np
@@ -23,6 +24,7 @@ import numpy as np
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
+from ament_index_python.packages import get_package_share_directory
 
 
 #___Global Variables:
@@ -41,7 +43,7 @@ class CameraPublisher(Node):
     
     """
 
-    def __init__(self, capture):
+    def __init__(self, capture, topic=TOPIC, queue=QUEUE_SIZE, period=PERIOD):
         """Constructor.
 
         Args:
@@ -52,8 +54,8 @@ class CameraPublisher(Node):
         super().__init__('camera_publisher')
         
         # initialize publisher
-        self.publisher_ = self.create_publisher(Image, TOPIC, QUEUE_SIZE)
-        timer_period = PERIOD
+        self.publisher_ = self.create_publisher(Image, topic, queue)
+        timer_period = period
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         # set image counter and videocapture object
@@ -85,7 +87,7 @@ class CameraPublisher(Node):
 
             # publishes message
             self.publisher_.publish(msg)
-            self.get_logger().info('ANI717-Camera Publishing: %d' % self.i)
+            self.get_logger().info('%d Images Published' % self.i)
         
         # image counter increment
         self.i += 1
@@ -99,18 +101,27 @@ def main(args=None):
     
     """
     
-    # creates OpenCV Videocapture object
-    capture = cv2.VideoCapture(DEVICE_INDEX)
+    # loads setting file set parameters
+    settings = os.path.join(get_package_share_directory('ros2_camera_publish'),
+                            "settings.json")
     
-    # initializes node and start publishing
-    rclpy.init(args=args)
-    camera_publisher = CameraPublisher(capture)
-    rclpy.spin(camera_publisher)
+    with open(settings) as fp:
+        content = json.load(fp)
+        
+        # creates OpenCV Videocapture object
+        capture = cv2.VideoCapture(content["device_index"])
+        
+        # initializes node and start publishing
+        rclpy.init(args=args)
+        camera_publisher = CameraPublisher(capture, content["topic"],
+                                           content["queue_size"], 
+                                           content["period"])
+        rclpy.spin(camera_publisher)
 
-    # shuts down nose and releases everything
-    camera_publisher.destroy_node()
-    rclpy.shutdown()
-    capture.release()
+        # shuts down nose and releases everything
+        camera_publisher.destroy_node()
+        rclpy.shutdown()
+        capture.release()
     
     return None
 

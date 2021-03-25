@@ -1,0 +1,6 @@
+{
+    "device_index": 0,
+    "topic": "racecar/camera",
+    "queue_size": 1,
+    "period": 0.1
+}
