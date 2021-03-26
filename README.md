@@ -2,7 +2,7 @@
   <h1 align="center">ROS 2 Camera Image Publish Package</h1>
 </p>
 
-ROS 2 Package to Publish Camera Image as sensor_msgs/Image message. Compatible with Raspberry Pi 64 Bit OS. ROS cv_bridge package is not required.
+ROS 2 Package to Publish Camera Image as sensor_msgs/Image message. Compatible with Raspberry Pi 64 Bit OS. ROS cv_bridge package is not required. Only depends on OpenCV Python3.
 
 ## Colaborators
 [Computer Fusion Laboratory (CFL) - Temple University College of Engineering](https://sites.temple.edu/cflab/people/)
