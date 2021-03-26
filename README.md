@@ -1,6 +1,5 @@
 <p align="center">
   <h1 align="center">ROS 2 Camera Image Publish Package</h1>
-  <h1 align="center">(Python 3, OpenCV)</h1>
 </p>
 
 ROS 2 Package to Publish Camera Image as sensor_msgs/Image message. Compatible with Raspberry Pi 64 Bit OS. ROS cv_bridge package is not required.
