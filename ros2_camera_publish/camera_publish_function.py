@@ -43,6 +43,7 @@ class CameraPublisher(Node):
     
     """
 
+    
     def __init__(self, capture, topic=TOPIC, queue=QUEUE_SIZE, period=PERIOD):
         """Constructor.
 
@@ -62,6 +63,7 @@ class CameraPublisher(Node):
         self.capture = capture
         self.i = 0
 
+        
     def timer_callback(self):
         """Timer Callback Function
         
@@ -69,11 +71,11 @@ class CameraPublisher(Node):
         
         """
 
-        # reads image data
-        ret, frame = self.capture.read()
-        
-        if ret:
+        if self.capture.isOpened():
             
+            # reads image data
+            ret, frame = self.capture.read()
+
             # processes image data and converts to ros 2 message
             msg = Image()
             msg.header.stamp = Node.get_clock(self).now().to_msg()
@@ -110,6 +112,7 @@ def main(args=None):
         
         # creates OpenCV Videocapture object
         capture = cv2.VideoCapture(content["device_index"])
+        capture.set(cv2.CAP_PROP_BUFFERSIZE, 2)
         
         # initializes node and start publishing
         rclpy.init(args=args)
