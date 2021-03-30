@@ -80,7 +80,7 @@ class CameraPublisher(Node):
             msg.header.frame_id = 'ANI717'
             msg.height = np.shape(frame)[0]
             msg.width = np.shape(frame)[1]
-            msg.encoding = "np.uint8"
+            msg.encoding = "bgr8"
             msg.is_bigendian = False
             msg.step = np.shape(frame)[2] * np.shape(frame)[1]
             msg.data = np.array(frame).tobytes()
