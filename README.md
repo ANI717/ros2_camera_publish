@@ -48,7 +48,7 @@ queue_size: 1 (amount of queued messages)
 period: 0.1 (execution time)
 ```
 
-## Install Package
+## Install and Run Package
 ```
 git clone https://github.com/ANI717/ros2_camera_publish
 colcon build && . install/setup.bash && ros2 run ros2_camera_publish execute
